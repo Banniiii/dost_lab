@@ -1,0 +1,937 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.inventory-button, .transaction-button {
+    flex: 0;
+    text-align: center;
+    margin-right: 20px; 
+}
+
+.inventory-button:last-child, .transaction-button:last-child {
+    margin-right: 0; 
+}
+
+.inventory-button button, .transaction-button button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.inventory-button button:hover, .transaction-button button:hover, .add-button:hover {
+    background-color: #0056b3;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-left: 200px; 
+}
+
+.inventory-container {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.inventory-header h1 {
+    display: flex;
+    align-items: center; 
+    margin: 0;
+    font-size: 24px;
+}
+
+.inventory-header h1::before {
+    content: "";
+    display: inline-block;
+    width: 40px;  
+    height: 40px;  
+    background-image: url('../image/inventory.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.add-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-left: 210px;
+    padding: 10px;
+    gap: 20px;
+}
+
+.card {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px; 
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-stock-notice {
+    background-color: rgba(238, 123, 9, 0.213);
+}
+
+.card-expiry-warning {
+    background-color: rgba(238, 123, 9, 0.213);
+}
+
+.card-out-of-stock {
+    background-color: rgba(255, 0, 0, 0.213);
+}
+
+.card-expired-batch {
+    background-color: rgba(255, 0, 0, 0.213);
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #333;
+}
+
+.warning-icon, .out-of-stock-icon {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.button-container {
+    display: flex;
+    padding: 10px;
+}
+
+.inventory-button, .transaction-button {
+    flex: 0;
+    text-align: center;
+    margin-right: 10px; 
+}
+
+.inventory-button button, .transaction-button button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.inventory-button button:hover, .transaction-button button:hover {
+    background-color: #0056b3;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.inventory-table th, .inventory-table td {
+    border: none;
+    text-align: center;
+    padding: 8px;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color: #e1e1e1; 
+}
+
+.table tbody tr:hover {
+    background-color: #e1e1e1;
+}
+
+.inventory-table th {
+    background-color: #333;
+    color: #fff;
+}
+
+.action-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.action-btn.edit-btn {
+    color: #4CAF50; 
+}
+
+.action-btn.delete-btn {
+    color: #fe2600; 
+}
+.use-btn {
+    border-radius: 8px;
+    padding: 2px;
+    width: 50%;
+    background-color: #333;
+    color: #fff;
+}
+
+.use-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Original different custom modals */
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.custom-modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.custom-modal-header, .custom-modal-body {
+    padding: 20px;
+}
+
+.custom-modal-title {
+    margin: 0;
+}
+
+.custom-modal-header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close {
+    cursor: pointer;
+    font-size: 24px;
+    color: #999;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group .readonly-field {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #333;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Insufficient Stock Modal Styles */
+.insufficient-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.insufficient-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.insufficient-modal-header h3 {
+    margin: 0;
+    padding-right: 30px;
+}
+
+.insufficient-modal-body p {
+    margin: 0 0 20px 0;
+    padding-right: 30px;
+}
+
+.warning-symbol {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    font-size: 5.5em; 
+}
+
+.insufficient-btn-primary {
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.insufficient-btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Expired Stock Modal Styles */
+.expired-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.expired-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.expired-modal-header h3 {
+    margin: 0;
+    padding-right: 30px;
+}
+
+.expired-modal-body p {
+    margin: 0 0 20px 0;
+    padding-right: 30px;
+}
+
+.warning-symbol {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    font-size: 5.5em; 
+}
+
+.expired-btn-primary {
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.expired-btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Expired Stock Modal Styles */
+.insufficientexpired-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.insufficientexpired-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.insufficientexpired-modal-header h3 {
+    margin: 0;
+    padding-right: 30px;
+}
+
+.insufficientexpired-modal-body p {
+    margin: 0 0 20px 0;
+    padding-right: 30px;
+}
+
+.warnings-symbol {
+    position: absolute;
+    top: 50px; 
+    right: 10px; 
+    font-size: 5.5em; 
+}
+
+.insufficientexpired-btn-primary {
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.insufficientexpired-btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Table body row updates*/
+.stock-cell, .exp-date-cell {
+    position: relative;
+    padding-right: 25px; 
+}
+
+.stock-wrapper, .exp-date-wrapper {
+    display: flex;
+    align-items: center; 
+    position: relative;
+}
+
+.stock-value, .exp-date-value {
+    display: inline-block;
+    margin-right: auto; 
+}
+
+.out-of-stock-icons, .warning-icons {
+    position: absolute;
+    right: 5px; 
+}
+
+/* receipt modal design */
+.receipt-custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center; 
+}
+
+.receipt-modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.receipt-modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.receipt-modal-header h3 {
+    margin: 0;
+}
+
+.receipt-modal-body {
+    padding-top: 10px;
+    text-align: left;
+}
+
+.receipt-form-group {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.receipt-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.receipt-modal-body p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.receipt-btn-primary {
+    background-color: #353535;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+.receipt-btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Confirmation Modal */
+.decision-custom-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.decision-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; 
+    max-width: 500px; 
+    border-radius: 8px; 
+}
+
+.decision-modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.decision-modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.decision-modal-buttons button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.decision-modal-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Insufficient balance Modal Styles */
+.insufficient-balance-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    text-align: center;
+    align-items: center;
+}
+
+.insufficient-balance-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.insufficient-balance-modal-header h3 {
+    margin: 0;
+}
+
+.insufficient-balance-modal-body p {
+    margin: 0 0 20px 0;
+}
+
+.insufficient-balance-btn-primary {
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.insufficient-balance-btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Insufficient balance Modal Styles */
+.insufficient-decision-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    text-align: center;
+    align-items: center;
+}
+
+.insufficient-decision-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.insufficient-decision-modal-header h3 {
+    margin: 0;
+}
+
+.insufficient-decision-modal-body p {
+    margin: 0 0 20px 0;
+}
+
+.insufficient-decision-btn-primary,
+.insufficient-decision-btn-secondary {
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.insufficient-decision-btn-primary:hover,
+.insufficient-decision-btn-secondary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* receipt modal design */
+.Receipt-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); 
+    justify-content: center;
+    align-items: center;
+}
+
+.Receipt-modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.Receipt-modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.Receipt-modal-header h3 {
+    margin: 0;
+}
+
+.Receipt-modal-body {
+    padding-top: 10px;
+    text-align: left;
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.receipt-table th,
+.receipt-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.receipt-table th {
+    background-color: #f2f2f2;
+}
+
+.Receipt-form-group {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.Receipt-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.Receipt-modal-body p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.receipt-btn-primary {
+    background-color: #353535;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+.receipt-btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* delete modal */
+.delete-custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.delete-custom-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 20%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    text-align: center;
+}
+
+.delete-custom-modal-header h3 {
+    margin: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.delete-custom-modal-body {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.delete-custom-modal-body p {
+    margin: 10px 0;
+}
+
+.btns {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+}
+
+.confirm-btn {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336; 
+    color: white;
+}
+
+.confirm-btn:hover, .cancel-btn:hover {
+    opacity: 0.8;
+}
+
+/* Remarks modal design */
+.remarks-custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center; 
+}
+
+.remarks-modal-content {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.remarks-modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.remarks-modal-header h3 {
+    margin: 0;
+}
+
+.remarks-modal-body {
+    padding-top: 10px;
+    text-align: left;
+}
+
+.remarks-form-group {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.remarks-btn-primary {
+    background-color: #353535;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.remarks-btn-primary:hover {
+    background-color: #0056b3;
+}

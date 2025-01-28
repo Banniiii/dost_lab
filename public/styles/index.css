@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    background-color: #f4f4f4;
+    background: url(../image/lp-3d.png) no-repeat center center fixed; 
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+}
+
+.lab-text {
+    margin: 150px 250px 15px;
+    font-size: 400%;
+}
+
+.descrip {
+    margin-left: 250px;
+    font-size: 120%;
+    color: #3a3a3a;
+}
+
+.btn-get-started {
+    display: inline-block;
+    padding: 30px 60px;
+    background-color: #000000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 30px; 
+    transition: background-color 0.3s;
+    margin-left: 250px;
+    font-size: 130%;
+}
+
+.btn-get-started:hover {
+    background-color: #0056b3;
+}

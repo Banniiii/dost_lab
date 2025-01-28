@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.main-container {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row; 
+    margin-left: 220px; 
+    margin-right: 20px;
+}
+
+.report-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 90vh;
+    flex: 3; 
+    margin-right: 10px; 
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.report-header h1 {
+    display: flex;
+    align-items: center;
+    margin: 0; 
+}
+
+.report-header h1::before {
+    content: "";
+    display: inline-block;
+    width: 40px;  
+    height: 40px;  
+    background-image: url('../image/reports.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.r-button {
+    background-color: #353535;
+    color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.r-button:hover {
+    background-color: #0056b3;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.report-table th, .report-table td {
+    border: none;
+    text-align: center;
+    padding: 8px;
+}
+
+.table thead th {
+    background-color: #333; 
+    color: white;
+    border-color: none;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color: #e1e1e1; 
+}
+
+.table tbody tr:hover {
+    background-color: #e1e1e1;
+}
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    flex: 1; 
+    margin-left: 10px; 
+}
+
+.chart-container {
+    width: 510px;
+    height: 890px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px ;
+}

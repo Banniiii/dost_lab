@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden; 
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding: 50px; 
+}
+
+.login-content {
+    display: flex;
+    width: 100%;
+    max-width: 1500px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.login-form {
+    flex: 1;
+    padding: 80px;
+    display: flex;
+    flex-direction: column; 
+    margin-top: 50px;
+}
+
+.login-form h2 {
+    color: #000000;
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+.form-group .input-container {
+    position: relative;
+}
+
+.form-group .input-container input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.form-group .input-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 25px;
+    color: #000;
+}
+
+.form-group input[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px; 
+}
+
+.register-link {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.login-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.login-image img {
+    max-width: 90%;
+    height: auto;
+}
